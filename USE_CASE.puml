@@ -1,0 +1,111 @@
+
+@startuml
+left to right direction
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam linetype ortho
+skinparam packageStyle rectangle
+skinparam roundcorner 15
+skinparam defaultFontName Arial
+skinparam defaultFontSize 13
+skinparam ArrowColor #475569
+skinparam ActorBorderColor #1D4ED8
+skinparam ActorFontColor #1E3A8A
+skinparam UsecaseBorderColor #2563EB
+skinparam UsecaseBackgroundColor #EFF6FF
+skinparam PackageBorderColor #94A3B8
+skinparam PackageFontColor #0F172A
+
+actor "راننده" as Driver
+actor "مدیر پارکینگ" as Manager
+actor "مدیر سیستم" as Admin
+actor "درگاه پرداخت" as Gateway <<external>>
+
+rectangle "سیستم هوشمند مدیریت پارکینگ‌های شهری" {
+
+  package "احراز هویت و حساب کاربری" {
+    usecase "ثبت‌نام" as Register
+    usecase "ورود به سیستم" as Login
+    usecase "خروج از سیستم" as Logout
+    usecase "مدیریت حساب کاربری" as Profile
+  }
+
+  package "جست‌وجو و رزرو" {
+    usecase "مشاهده پارکینگ‌ها" as ViewParking
+    usecase "جست‌وجو و فیلتر" as Search
+    usecase "مشاهده ظرفیت خالی" as Capacity
+    usecase "مشاهده جزئیات و تعرفه" as Details
+    usecase "رزرو جای پارک" as Reserve
+    usecase "لغو رزرو" as Cancel
+    usecase "مشاهده رزروهای من" as MyReservations
+  }
+
+  package "مدیریت ورود، خروج و پرداخت" {
+    usecase "ثبت ورود خودرو" as Entry
+    usecase "ثبت خروج خودرو" as Exit
+    usecase "محاسبه هزینه توقف" as Fee
+    usecase "پرداخت هزینه" as Pay
+    usecase "صدور رسید" as Receipt
+  }
+
+  package "مدیریت پارکینگ" {
+    usecase "مدیریت اطلاعات پارکینگ" as ParkingInfo
+    usecase "مدیریت ظرفیت و جایگاه‌ها" as Spaces
+    usecase "مدیریت تعرفه‌ها" as Tariffs
+    usecase "مشاهده رزروها" as ManageReservations
+    usecase "گزارش ورود و خروج" as Reports
+  }
+
+  package "مدیریت سامانه" {
+    usecase "مدیریت کاربران" as Users
+    usecase "مدیریت نقش و دسترسی‌ها" as Roles
+    usecase "گزارش کلی سامانه" as SystemReports
+  }
+}
+
+' سطح دسترسی راننده
+Driver --> Login
+Driver --> Register
+Driver --> Logout
+Driver --> Profile
+Driver --> ViewParking
+Driver --> Search
+Driver --> Capacity
+Driver --> Details
+Driver --> Reserve
+Driver --> Cancel
+Driver --> MyReservations
+Driver --> Pay
+
+' سطح دسترسی مدیر پارکینگ
+Manager --> Login
+Manager --> Logout
+Manager --> ParkingInfo
+Manager --> Spaces
+Manager --> Tariffs
+Manager --> Entry
+Manager --> Exit
+Manager --> ManageReservations
+Manager --> Reports
+
+' سطح دسترسی مدیر سیستم
+Admin --> Login
+Admin --> Logout
+Admin --> Users
+Admin --> Roles
+Admin --> SystemReports
+
+' ارتباط‌های include
+Search ..> ViewParking : <<include>>
+Reserve ..> Capacity : <<include>>
+Exit ..> Fee : <<include>>
+Pay ..> Receipt : <<include>>
+
+' ارتباط extend
+Cancel ..> MyReservations : <<extend>>
+
+' درگاه پرداخت خارجی
+Gateway --> Pay
+
+@enduml
