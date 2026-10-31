@@ -1,6 +1,4 @@
-User Stories & Acceptance Criteria
-
-پروژه: سیستم هوشمند مدیریت پارکینگ‌های شهری
+User Stories
 
 US-01: مشاهده ظرفیت خالی
 
