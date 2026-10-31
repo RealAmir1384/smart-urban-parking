@@ -208,10 +208,8 @@
 ## پیوست الف — لینک‌های مرتبط
 
 - **Repository:** https://share.google/BkIJI5p4bObHbtpnZ
-- **Project Board:** در صورت راه‌اندازی، لینک ثبت شود.
-- **Issues:** بخش Issues مخزن GitHub
-- **Pull Requests:** بخش Pull Requests مخزن GitHub
-- **مستندات:** مخزن GitHub پروژه
+- **Project Board:** در صورت راه‌اندازی، لینک ثبت می شود.
+- **Documentation:** مخزن GitHub پروژه
 - **Demo:** در حال برنامه‌ریزی برای مراحل بعدی توسعه
 
 ---
